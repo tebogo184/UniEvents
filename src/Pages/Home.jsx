@@ -3,6 +3,7 @@ import banner from '../assets/banner.png'
 import { Cat, Search, StepBack } from 'lucide-react'
 import { ArrowRight } from 'lucide-react'
 import CatalogCard from '../Components/CatalogCard'
+import CategoryCard from '../Components/CategoryCard'
 function Home() {
   return (
     <>
@@ -42,6 +43,17 @@ function Home() {
     </div>
     <div className='flex justify-center mt-14'>
      <CatalogCard/>
+    </div>
+    <div className='flex justify-center justify-items-center mt-14'>
+      <div className='flex flex-col'>
+        <span className='flex justify-center text-xl text-accent font-bold'>BROWSE BY</span>
+        <span className='flex justify-center text-5xl mt-5 font-semibold'>Event Categories</span>
+        <span className='mt-7 wrap-break-word text-xl text-gray-600'>Find Exactly what you're looking for.From academic workshops to parties, we've got it all</span>
+
+      </div>
+    </div>
+    <div className='flex justify-center justify-items-center'>
+      <CategoryCard/>
     </div>
     </>
   )
