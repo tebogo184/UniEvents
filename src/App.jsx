@@ -4,6 +4,8 @@ import viteLogo from '/vite.svg'
 import{ BrowserRouter,Routes,Route} from 'react-router-dom'
 import Home from './Pages/Home'
 import Navbar from './Components/Navbar'
+import Event from './Pages/Event'
+import AllEvents from './Pages/AllEvents'
 
 function App() {
 
@@ -13,6 +15,8 @@ function App() {
    <Navbar/>
    <Routes>
     <Route path='/UniEvents' element={<Home/>}/>
+    <Route path='UniEvents/events/:eventID' element={<Event/>}/>
+    <Route path='UniEvents/events'element={<AllEvents/>}/>
    </Routes>
    </BrowserRouter>
   )
