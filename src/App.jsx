@@ -6,6 +6,7 @@ import Home from './Pages/Home'
 import Navbar from './Components/Navbar'
 import Event from './Pages/Event'
 import AllEvents from './Pages/AllEvents'
+import Footer from './Components/Footer'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
     <Route path='UniEvents/events/:eventID' element={<Event/>}/>
     <Route path='UniEvents/events'element={<AllEvents/>}/>
    </Routes>
+   <Footer/>
    </BrowserRouter>
   )
 }
