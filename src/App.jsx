@@ -7,6 +7,7 @@ import Navbar from './Components/Navbar'
 import Event from './Pages/Event'
 import AllEvents from './Pages/AllEvents'
 import Footer from './Components/Footer'
+import SubmitEvent from './Pages/Submit-Events'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
     <Route path='/UniEvents' element={<Home/>}/>
     <Route path='UniEvents/events/:eventID' element={<Event/>}/>
     <Route path='UniEvents/events'element={<AllEvents/>}/>
+    <Route path='UniEvents/submitEvent' element={<SubmitEvent/>}/>
    </Routes>
    <Footer/>
    </BrowserRouter>

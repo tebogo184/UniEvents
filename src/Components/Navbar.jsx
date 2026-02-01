@@ -11,9 +11,9 @@ function Navbar() {
         </div>
         <div className='flex flex-row justify-between text-2xl '>
            <ul className='flex gap-10 text-black/40'>
-            <li className='hover:bg-white hover:rounded-2xl p-2'><Link to={"#"}>Home</Link></li>
-            <li className='hover:bg-white hover:rounded-2xl p-2'><Link to={"#"}>Events</Link></li>
-            <li className='hover:bg-white hover:rounded-2xl p-2'><Link to={"#"}>Categories</Link></li>
+            <li className='hover:bg-white hover:rounded-2xl p-2 cursor-pointer'><Link to={"/UniEvents"}>Home</Link></li>
+            <li className='hover:bg-white hover:rounded-2xl p-2 cursor-pointer'><Link to={"/UniEvents/events"}>Events</Link></li>
+            <li className='hover:bg-white hover:rounded-2xl p-2 cursor-pointer'><Link to={"/UniEvents/Categories"}>Categories</Link></li>
            </ul>
         </div>
         <div className='flex flex-row justify-between'>
