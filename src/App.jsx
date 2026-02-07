@@ -8,6 +8,9 @@ import Event from './Pages/Event'
 import AllEvents from './Pages/AllEvents'
 import Footer from './Components/Footer'
 import SubmitEvent from './Pages/Submit-Events'
+import Login from './Pages/Login'
+import Approval from './Pages/Approval'
+import Request from './Pages/Request'
 
 function App() {
 
@@ -20,6 +23,9 @@ function App() {
     <Route path='UniEvents/events/:eventID' element={<Event/>}/>
     <Route path='UniEvents/events'element={<AllEvents/>}/>
     <Route path='UniEvents/submitEvent' element={<SubmitEvent/>}/>
+    <Route path='UniEvents/adminLogin' element={<Login/>}/>
+    <Route path='UniEvents/approvals' element={<Approval/>}/>
+    <Route path='UniEvents/request' element={<Request/>}/>
    </Routes>
    <Footer/>
    </BrowserRouter>
