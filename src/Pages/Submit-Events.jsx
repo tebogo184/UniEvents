@@ -4,36 +4,45 @@ import { supabase } from '../Config/supabase';
 function submitEvents() {
     const [formData,setFormData]=useState({
     title:"",
-    desrciption:"",
+    description:"",
     category:"",
     date:"",
     filePath:"",
     startTime:"",
     endTime:"",
     location:"",
-    ticketPrice:"",
-        organization:"",
-        email:"",
-        phone:""
+    ticketFee:"",
+        organizer:"",
+        orgEmail:"",
+        phoneNumber:"",
+        status:"pending",
+        comment:""
     
 
 })
 const [image,setImage]=useState(null);
 const handleChange=(e)=>{
-
   const {name,value}=e.target;
-  setFormData(()=>{ return {...prev,[name]:value}});
+  setFormData((prev)=>{ return {...prev,[name]:value}});
 }
 const onSubmit=async()=>{
 
 
-  let filePath=formData.organization+"/"+image.name;
+  let filePath=formData.organizer+"/"+image.name;
 
-  const {data,error}=supabase.storage.from("images").upload(filePath,image);
-  console.log(data,error);
-  if(!error){
+  const {error}=await supabase.storage.from("images").upload(filePath,image);
+  
+  if(error){
 
-    const {data,error}=supabase.from("Event").insert(formData)
+    
+  }else{
+const finalData={...formData,filePath};
+    const {data,error}=await supabase.from("Event").insert(finalData);
+    if(error){
+      console.log(error);
+    }else{
+      console.log(data)
+    }
   }
 
 
@@ -71,12 +80,12 @@ const handleSelectImage=(e)=>{
         </div>
          <div className='flex flex-col gap-2'>
             <label htmlFor="description">Description</label>
-            <textarea onChange={handleChange} value={formData.desrciption}className='focus:outline-none focus:border-accent h-10 border border-gray-300 rounded-xl' type="text" name="description" id="" required />
+            <textarea onChange={handleChange} value={formData.description} className='focus:outline-none focus:border-accent h-10 border border-gray-300 rounded-xl' type="text" name="description" id="description" required />
         </div>
         
          <div className='flex flex-col gap-2'>
-            <label htmlFor="image">Category</label>
-            <input onChange={handleChange} value={formData.category} className='focus:outline-none border border-gray-300 focus:border-accent h-10 p-2 rounded-xl' type="text" name="image" id="" required />
+            <label htmlFor="category">Category</label>
+            <input onChange={handleChange} value={formData.category} className='focus:outline-none border border-gray-300 focus:border-accent h-10 p-2 rounded-xl' type="text" name="category" id="" required />
         </div>
         <div className='flex flex-col gap-2'>
             <label htmlFor="image">Event Poster</label>
@@ -91,7 +100,7 @@ const handleSelectImage=(e)=>{
 
                  <div className='flex flex-col gap-2'>
             <label htmlFor="date">Date</label>
-            <input onChange={handleChange} value={formData.date} className='border border-gray-300 focus:outline-none focus:border-accent h-10 rounded-xl' type="date" name="" id="" required />
+            <input onChange={handleChange} value={formData.date} className='border border-gray-300 focus:outline-none focus:border-accent h-10 rounded-xl' type="date" name="date" id="" required />
 
             </div>
             <div className='flex flex-row gap-2 justify-evenly w-full '>
@@ -116,8 +125,8 @@ const handleSelectImage=(e)=>{
         </div>
 
          <div className='flex flex-col gap-2'>
-            <label htmlFor="ticketPrice">Ticket Price</label>
-            <input onChange={handleChange} value={formData.ticketPrice} className='border border-gray-300 h-10 focus:border-accent rounded-xl' type="text" name="ticetPrice" id="" required />
+            <label htmlFor="ticketFee">Ticket Price</label>
+            <input onChange={handleChange} value={formData.ticketFee} className='border border-gray-300 h-10 focus:border-accent rounded-xl' type="text" name="ticketFee" id="" required />
         </div>
        
           <div className='flex flex-col'>
@@ -126,25 +135,25 @@ const handleSelectImage=(e)=>{
           </div>
 
                  <div className='flex flex-col gap-2'>
-            <label htmlFor="organization">Organization/Club</label>
-            <input onChange={handleChange} value={formData.organization}  className='border border-gray-300 focus:outline-none focus:border-accent h-10 rounded-xl' type="text" name="organization" id="" required />
+            <label htmlFor="organizer">Organization/Club</label>
+            <input onChange={handleChange} value={formData.organizer}  className='border border-gray-300 focus:outline-none focus:border-accent h-10 rounded-xl' type="text" name="organizer" id="" required />
 
             </div>
             <div className='flex flex-row gap-2 justify-evenly w-full '>
                  <div className='flex flex-col gap-2 w-1/2'>
-            <label htmlFor="email">Email</label>
-            <input onChange={handleChange} value={formData.email}  className='border border-gray-300 h-10 focus:border-accent rounded-xl ' type="email" name="email" id="" required />
+            <label htmlFor="orgEmail">Email</label>
+            <input onChange={handleChange} value={formData.orgEmail}  className='border border-gray-300 h-10 focus:border-accent rounded-xl ' type="email" name="orgEmail" id="" required />
         </div>
          <div className='flex flex-col gap-2 w-1/2'>
-            <label htmlFor="phone">Phone</label>
-            <input onChange={handleChange} value={formData.phone}  className='border border-gray-300 focus:border-accent h-10 rounded-xl' type="tel" name="phone" id="" required />
+            <label htmlFor="phoneNumber">Phone</label>
+            <input onChange={handleChange} value={formData.phoneNumber}  className='border border-gray-300 focus:border-accent h-10 rounded-xl' type="tel" name="phoneNumber" id="" required />
         </div>
             </div>
         
        
        
         <div className='flex flex-row justify-between'>
-            <input className='text-white bg-green-400 p-1 w-26 font-semibold rounded-xl cursor-pointer' type="button" value="Submit"  />
+            <input onClick={onSubmit} className='text-white bg-green-400 p-1 w-26 font-semibold rounded-xl cursor-pointer' type="button" value="Submit"  />
             <input className='text-white bg-red-400 p-1 w-26 font-semibold rounded-xl cursor-pointer' type="button" value="Cancel" />
         </div>
       </div>

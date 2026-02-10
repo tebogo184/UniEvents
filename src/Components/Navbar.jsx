@@ -18,8 +18,8 @@ function Navbar() {
         </div>
         <div className='flex flex-row justify-between'>
             <ul className='flex gap-10'>
-                <li className='p-3 cursor-pointer font-semibold shadow-accent bg-white rounded-2xl border border-accent '><Link to={"#"}>Submit Event</Link></li>
-                <li className='text-white font-semibold cursor-pointer p-3 bg-primary rounded-lg'><Link to={"#"}>Get Started</Link></li>
+                <li className='p-3 cursor-pointer font-semibold shadow-accent bg-white rounded-2xl border border-accent '><Link to={"/UniEvents/submitEvent"}>Submit Event</Link></li>
+               
             </ul>
         </div>
     </div>

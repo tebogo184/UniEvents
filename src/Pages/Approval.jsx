@@ -1,6 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { supabase } from '../Config/supabase'
 
 function Approval() {
+    const [events,setEvents]=useState([]);
+
+   useEffect(()=>{
+
+    const fetchData=async()=>{
+
+        const {data,error}=await supabase.from("Event").select("*").eq("status","pending");
+
+        if(error){
+            console.log(error)
+        }else{
+            setEvents(data);
+        }
+    }
+    fetchData();
+   },[])
   return (
 
     <div className='mb-5 mt-5' >
@@ -20,14 +37,19 @@ function Approval() {
                 </tr>
                 </thead>
                 <tbody className='text-gray-700 font-medium'>
-                    <tr className=''>
-                        <td className='px-16 py-3'>Title</td>
-                        <td className='px-16 py-3'>Title</td>
-                        <td className='px-16 py-3'>Title</td>
-                        <td className='px-16 py-3'>Title</td>
-                        <td className='px-16 py-3'>Title</td>
-                        <td className='px-16 py-3'><button type="button" className='hover:text-sky-600 cursor-pointer border-b hover:border-b-sky-400 '>View More</button></td>
+                    {events.map((event)=>{
+
+                        return (
+                            <tr className=''>
+                        <td className='px-16 py-3'>{event.title}</td>
+                        <td className='px-16 py-3'>{event.organizer}</td>
+                        <td className='px-16 py-3'>{formatDate(event.date)}</td>
+                        <td className='px-16 py-3'>{startTime.slice(0,5)}</td>
+                        <td className='px-16 py-3'>{EndTime}</td>
+                        <td className='px-16 py-3'><button onClick={navigate(`/UniEvent/request/${event.eventID}`)} type="button" className='hover:text-sky-600 cursor-pointer border-b hover:border-b-sky-400 '>View More</button></td>
                     </tr>
+                        )
+                    })}
                 </tbody>
             </table>
         </div>

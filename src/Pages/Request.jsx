@@ -1,22 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { supabase } from '../Config/supabase';
+import { useParams } from 'react-router-dom';
 
 function Request() {
-     const [formData,setFormData]=useState({
-        title:"",
-        desrciption:"",
-        category:"",
-        image:"",
-        date:"",
-        startTime:"",
-        endTime:"",
-        location:"",
-        ticketPrice:"",
-            organization:"",
-            email:"",
-            phone:""
-        
-    
-    })
+     const [event,setEvent]=useState({});
+     const {eventID}=useParams();
+
+     useEffect(()=>{
+
+        const fetchData=async()=>{
+
+            const {data,error}=await supabase.from("Event").select("*").eq("eventID",eventID)
+            if(error){
+                console.log(error);
+            }else {
+                setEvent(data);
+                console.log(data)
+            }
+        }
+     },[])
    return (
    <div className='mb-10'>
            

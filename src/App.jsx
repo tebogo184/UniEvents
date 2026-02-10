@@ -25,7 +25,7 @@ function App() {
     <Route path='UniEvents/submitEvent' element={<SubmitEvent/>}/>
     <Route path='UniEvents/adminLogin' element={<Login/>}/>
     <Route path='UniEvents/approvals' element={<Approval/>}/>
-    <Route path='UniEvents/request' element={<Request/>}/>
+    <Route path='UniEvents/request/:eventID' element={<Request/>}/>
    </Routes>
    <Footer/>
    </BrowserRouter>

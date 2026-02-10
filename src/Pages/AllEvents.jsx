@@ -1,10 +1,27 @@
 import { Filter, Search } from 'lucide-react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CatalogCard from '../Components/CatalogCard'
+import { supabase } from '../Config/supabase'
 
 function AllEvents() {
+
+    const [events, setEvents]=useState([]);
+    useEffect(()=>{
+        const fetchData=async()=>{
+
+            const {data,error}= await supabase.from("Event").select("*");
+
+            if(error){
+                console.log(error);
+            }else{
+                setEvents(data);
+                console.log(data); 
+            }
+            }
+            fetchData();
+        },[])
   return (
-    <div className='flex flex-col'> 
+    <div className='flex flex-col mb-10'> 
         <div className='flex flex-col justify-center pl-60 pr-52 pt-10 gap-2'>
             <span className='text-4xl font-bold'>All Events</span>
         <span className='text-xl text-gray-700 '>
@@ -30,7 +47,9 @@ function AllEvents() {
         <span className='text-gray-700 text-lg'>Showing 8 Events</span>
         </div>
     <div className='flex justify-center justify-items-center mt-10'>
-        <CatalogCard/>
+        {events.map((event)=>{
+       return <CatalogCard key={event.eventID} {...event} />
+      })}
     </div>
     </div>
   )
