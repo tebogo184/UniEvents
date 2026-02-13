@@ -20,7 +20,7 @@ function CatalogCard({eventID,date,startTime,endTime,category,title,location,com
   return (
     <div className='flex flex-col shadow-4xl rounded-3xl border border-gray-300 hover:cursor-pointer' onClick={()=> navigate(`/UniEvents/events/${eventID}`)}>
         <div className=''>
-            <img src={image} alt="catalog image" className='w-[400px] object-cover rounded-t-3xl'/>
+            <img src={image} alt="catalog image" className='w-[450px] object-cover rounded-t-3xl'/>
            
         </div>
         <div className='p-5'>

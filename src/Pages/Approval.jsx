@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { supabase } from '../Config/supabase'
+import { useNavigate } from 'react-router-dom';
 
 function Approval() {
     const [events,setEvents]=useState([]);
+    const navigate=useNavigate();
 
    useEffect(()=>{
 
@@ -14,10 +16,24 @@ function Approval() {
             console.log(error)
         }else{
             setEvents(data);
+            console.log(data)
         }
     }
     fetchData();
    },[])
+
+   const formatDate=(date)=>{
+
+    return new Intl.DateTimeFormat('en-ZA',{
+      day:"2-digit",
+      month:'short',
+      year:"numeric"
+    }).format(new Date(date));
+  }
+  const formatTime=(startTime,endTime)=>{
+
+    return `${startTime.slice(0,5)} - ${endTime.slice(0,5)}`;
+  }
   return (
 
     <div className='mb-5 mt-5' >
@@ -40,13 +56,13 @@ function Approval() {
                     {events.map((event)=>{
 
                         return (
-                            <tr className=''>
+                            <tr key={event.eventID} className=''>
                         <td className='px-16 py-3'>{event.title}</td>
                         <td className='px-16 py-3'>{event.organizer}</td>
                         <td className='px-16 py-3'>{formatDate(event.date)}</td>
-                        <td className='px-16 py-3'>{startTime.slice(0,5)}</td>
-                        <td className='px-16 py-3'>{EndTime}</td>
-                        <td className='px-16 py-3'><button onClick={navigate(`/UniEvent/request/${event.eventID}`)} type="button" className='hover:text-sky-600 cursor-pointer border-b hover:border-b-sky-400 '>View More</button></td>
+                        <td className='px-16 py-3'>{event.startTime.slice(0,5)}</td>
+                        <td className='px-16 py-3'>{event.endTime.slice(0,5)}</td>
+                        <td className='px-16 py-3'><button onClick={()=>navigate(`/UniEvents/request/${event.eventID}`)} type="button" className='hover:text-sky-600 cursor-pointer border-b hover:border-b-sky-400 '>View More</button></td>
                     </tr>
                         )
                     })}

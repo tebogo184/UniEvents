@@ -85,7 +85,14 @@ const handleSelectImage=(e)=>{
         
          <div className='flex flex-col gap-2'>
             <label htmlFor="category">Category</label>
-            <input onChange={handleChange} value={formData.category} className='focus:outline-none border border-gray-300 focus:border-accent h-10 p-2 rounded-xl' type="text" name="category" id="" required />
+            <select onChange={handleChange} value={formData.category} required className='focus:outline-none border border-gray-300 focus:border-accent h-10 p-2 rounded-xl' name="category" id="category">
+              <option value="">Select Category</option>
+              <option  value="cultural">Cultural</option>
+              <option value="social">Social</option>
+              <option value="career">Career</option>
+              <option value="academic">Academic</option>
+              <option value="sport">Sport</option>
+            </select>
         </div>
         <div className='flex flex-col gap-2'>
             <label htmlFor="image">Event Poster</label>
@@ -150,8 +157,6 @@ const handleSelectImage=(e)=>{
         </div>
             </div>
         
-       
-       
         <div className='flex flex-row justify-between'>
             <input onClick={onSubmit} className='text-white bg-green-400 p-1 w-26 font-semibold rounded-xl cursor-pointer' type="button" value="Submit"  />
             <input className='text-white bg-red-400 p-1 w-26 font-semibold rounded-xl cursor-pointer' type="button" value="Cancel" />
